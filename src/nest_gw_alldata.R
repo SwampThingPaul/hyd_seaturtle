@@ -160,8 +160,7 @@ colnames(sand.dat)=c("Sample", "Nest", "loc", "beach", "mean.grain", "sorting",
   "max.delta.temp", "max.delta.WC", 
   "max.delta.WL.MSL", "max.delta.WL.cl", 
   "dist.MHW","avg.nest.elev","Elevation")
-
-
+sand.dat=subset(sand.dat,Coyote.depredation=="N")
 vars=c("mean.grain", "sorting","skewness", "kurtosis", "compaction",
        "emergence.success","Beach.Slope.mean",
        "Avg.delta.Temp", "Avg.delta.WC", 
@@ -182,7 +181,7 @@ pca.dat1=na.omit(pca.dat1)
 KMOS(pca.dat1[,vars])
 
 
-vars2=c("mean.grain","sorting","compaction","bulk.density","emergence.success","Beach.Slope.mean",
+vars2=c("mean.grain","sorting","compaction","bulk.density","hatch.success","Beach.Slope.mean",
        "max.delta.temp","max.delta.WL.cl","dist.MHW","avg.nest.elev")
 # pca.dat=subset(sand.dat[,c("Nest", "loc", "beach",vars2)],loc=="Egg Chamber")
 # pca.dat=subset(sand.dat[,c("Nest", "loc", "beach",vars2)],loc=="Top")
@@ -190,6 +189,8 @@ pca.dat=sand.dat[,c("Nest", "loc", "beach",vars2)]
 pca.dat1=na.omit(pca.dat)
 KMOS(pca.dat1[,vars2])
 bart_spher(pca.dat1[,vars2])
+
+plot(mean.grain~max.delta.WL.cl,pca.dat1)
 
 # PCA
 pca.dat1.pca=rda(pca.dat1[,vars2],scale=T)
@@ -251,7 +252,8 @@ pchs=c(21,24)
 pch.vals=pchs[pca.dat1$loc]
 
 labs=rownames(scrs$species)
-labs=c("Grain Size","Sorting","Compaction","BD","Emerg. Succ.","Beach Slope","Max \u0394 Temp","Max \u0394 WL to clutch","Distance to MHW","Nest Elev")
+labs=c("Grain Size","Sorting","Compaction","BD","Hatch Succ.","Beach Slope","Max \u0394 Temp","Max \u0394 WL to clutch","Distance to MHW","Nest Elev")
+# labs=c("Grain Size","Sorting","Compaction","BD","Emerg. Succ.","Beach Slope","Max \u0394 Temp","Max \u0394 WL to clutch","Distance to MHW","Nest Elev")
 xlim.val=c(-2,2);by.x=1;xmaj=c(0,seq(xlim.val[1],xlim.val[2],by.x));xmin=seq(xlim.val[1],xlim.val[2],by.x/2);
 ylim.val=c(-2,2);by.y=1;ymaj=c(0,seq(ylim.val[1],ylim.val[2],by.y));ymin=seq(ylim.val[1],ylim.val[2],by.y/2);
 plot(xlim.val,ylim.val,type="n",yaxt="n",xaxt="n",ylab=NA,xlab=NA);
@@ -313,7 +315,8 @@ par(family="serif",mar=c(1,3,0.1,0.5),oma=c(2.5,1.5,0.75,0.5));
 layout(matrix(1:2,1,2),widths=c(1,1))
 # cols=wesanderson::wes_palette("Zissou1",3,"continuous")
 pchs=c(21,24)
-labs=c("Grain Size","Sorting","Compaction","BD","Emerg. Succ.","Beach Slope","Max \u0394 Temp","Max \u0394 WL to clutch","Distance to MHW","Nest Elev")
+labs=c("Grain Size","Sorting","Compaction","BD","Hatch Succ.","Beach Slope","Max \u0394 Temp","Max \u0394 WL to clutch","Distance to MHW","Nest Elev")
+# labs=c("Grain Size","Sorting","Compaction","BD","Emerg. Succ.","Beach Slope","Max \u0394 Temp","Max \u0394 WL to clutch","Distance to MHW","Nest Elev")
 
 cols.vals=cols[pca.dat.top$beach]
 pch.vals=pchs[2]
