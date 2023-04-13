@@ -359,3 +359,19 @@ legend("bottomright",legend=c("Captiva","Sanibel East","Sanibel West"),
        y.intersp=1.5,x.intersp=0.75,xpd=NA,xjust=0.5,yjust=0.5)
 dev.off()
 
+
+boxplot(PC1~beach,pca.dat.ch)
+kruskal.test(PC1~beach,pca.dat.ch)
+boxplot(PC2~beach,pca.dat.ch)
+kruskal.test(PC2~beach,pca.dat.ch)
+
+boxplot(PC1~beach,pca.dat.top)
+kruskal.test(PC1~beach,pca.dat.top)
+boxplot(PC2~beach,pca.dat.top)
+kruskal.test(PC2~beach,pca.dat.top)
+
+boxplot(PC1~beach,pca.dat1)
+kruskal.test(PC1~beach,pca.dat1)
+with(pca.dat1,dunn.test(PC1,beach))
+boxplot(PC2~beach,pca.dat.top)
+kruskal.test(PC2~beach,pca.dat.top)
